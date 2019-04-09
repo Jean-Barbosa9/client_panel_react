@@ -1,40 +1,40 @@
-import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { firestoreConnect } from 'react-redux-firebase';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { firestoreConnect } from "react-redux-firebase";
 
 class AddClient extends Component {
   state = {
-    firtName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    balance: ''
-  }
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    balance: ""
+  };
 
-  onChange = e => this.setState({[e.target.name]: e.target.value})
-  
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
   onSubmit = e => {
     e.preventDefault();
-    const { firestore, history } = this.props
+    const { firestore, history } = this.props;
 
     const newClient = this.state;
 
-    if(newClient.balance === '') {
-      newClient.balance =  0
+    if (newClient.balance === "") {
+      newClient.balance = 0;
     }
 
-    firestore.add({collection: 'clients'}, newClient).then(history.push('/'))
-  }
-  
+    firestore.add({ collection: "clients" }, newClient).then(history.push("/"));
+  };
+
   render() {
     return (
       <div className="add-client__main-wrapper row">
         <div className="col-md-6">
           <div className="add-clients__back">
             <Link to="/" className="btn btn-link">
-              <i className="icon-back fas fa-arrow-circle-left" />
-              {' '}Back to Dashboard
+              <i className="icon-back fas fa-arrow-circle-left" /> Back to
+              Dashboard
             </Link>
           </div>
           <div className="card">
@@ -43,7 +43,7 @@ class AddClient extends Component {
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <label htmlFor="firstName">First Name</label>
-                  <input 
+                  <input
                     className="form-control"
                     type="text"
                     name="firstName"
@@ -55,7 +55,7 @@ class AddClient extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="lastName">Last Name</label>
-                  <input 
+                  <input
                     className="form-control"
                     type="text"
                     name="lastName"
@@ -67,7 +67,7 @@ class AddClient extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
-                  <input 
+                  <input
                     className="form-control"
                     type="email"
                     name="email"
@@ -77,7 +77,7 @@ class AddClient extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="phone">Phone</label>
-                  <input 
+                  <input
                     className="form-control"
                     type="text"
                     name="phone"
@@ -87,7 +87,7 @@ class AddClient extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="balance">Balance</label>
-                  <input 
+                  <input
                     className="form-control"
                     type="text"
                     name="balance"
@@ -95,18 +95,22 @@ class AddClient extends Component {
                     value={this.state.balance}
                   />
                 </div>
-                <input type="submit" className="btn btn-block btn-primary" value="Add Client" />
+                <input
+                  type="submit"
+                  className="btn btn-block btn-primary"
+                  value="Add Client"
+                />
               </form>
             </div>
-        </div>
+          </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 AddClient.propTypes = {
   firestore: PropTypes.object.isRequired
-}
+};
 
 export default firestoreConnect()(AddClient);
