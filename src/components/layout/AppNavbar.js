@@ -19,7 +19,7 @@ class AppNavbar extends Component {
             <div className="collapse navbar-collapse" id="navbarMain">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <Link to="/dashboard" className="nav-link" >Dashboard</Link>
+                  <Link to="/" className="nav-link" >Dashboard</Link>
                 </li>
               </ul>
             </div>
