@@ -67,6 +67,11 @@ class AppNavbar extends Component {
                       </span>
                     </li>
                     <li className="nav-item">
+                      <Link to="/settings" className="nav-link">
+                        Settings
+                      </Link>
+                    </li>
+                    <li className="nav-item">
                       <span
                         className="nav-link"
                         style={{ cursor: "pointer" }}
@@ -88,12 +93,14 @@ class AppNavbar extends Component {
 
 AppNavbar.propTypes = {
   firebase: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired
 };
 
 export default compose(
   firebaseConnect(),
   connect((state, props) => ({
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    settings: state.settings
   }))
 )(AppNavbar);
