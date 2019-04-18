@@ -27,7 +27,8 @@ class AppNavbar extends Component {
 
   render() {
     const { isAuthenicated } = this.state,
-      { auth } = this.props;
+      { auth } = this.props,
+      { allowRegistration } = this.props.settings
 
     return (
       <header className="header">
@@ -76,6 +77,30 @@ class AppNavbar extends Component {
                       >
                         Logout
                       </span>
+                    </li>
+                  </ul>
+                </div>
+              </React.Fragment>
+            ) : null}
+            {allowRegistration && !isAuthenicated ? (
+              <React.Fragment>
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarMain"
+                >
+                  <i className="navbar-toggler-icon" />
+                </button>
+                <div className="collapse navbar-collapse" id="navbarMain">
+                  <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                      <Link to="/login" className="nav-link">Login</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/register" className="nav-link">
+                        Register
+                      </Link>
                     </li>
                   </ul>
                 </div>
