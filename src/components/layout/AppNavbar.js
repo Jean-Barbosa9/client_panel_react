@@ -22,10 +22,7 @@ class AppNavbar extends Component {
 
   onLogoutClick = e => {
     e.preventDefault();
-
-    const { firebase } = this.props;
-
-    firebase.logout();
+    this.props.firebase.logout().then(localStorage.removeItem("settings"));
   };
 
   render() {
