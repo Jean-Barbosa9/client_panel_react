@@ -52,7 +52,7 @@ class Login extends Component {
               ) : null}
               <h1 className="text-center pb-4 pt-3">
                 <span className="text-primary">
-                  <i className="fas fa-lock" />
+                  <i className="fas fa-lock mr-2" />
                   Login
                 </span>
               </h1>
