@@ -143,8 +143,8 @@ export default compose(
       doc: props.match.params.id
     }
   ]),
-  connect((state, props) => ({
-    client: state.firestore.ordered.client && state.firestore.ordered.client[0],
-    settings: state.settings
+  connect(({firestore: {ordered}, settings}, props) => ({
+    client: ordered.client && ordered.client[0],
+    settings
   }))
 )(EditClient);
