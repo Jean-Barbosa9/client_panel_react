@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import { connect } from "react-redux";
 
 class AddClient extends Component {
   state = {
@@ -28,6 +30,8 @@ class AddClient extends Component {
   };
 
   render() {
+    const { disableBalanceOnAdd } = this.props.settings;
+
     return (
       <div className="add-client__main-wrapper row">
         <div className="col-md-6">
@@ -93,6 +97,7 @@ class AddClient extends Component {
                     name="balance"
                     onChange={this.onChange}
                     value={this.state.balance}
+                    disabled={disableBalanceOnAdd}
                   />
                 </div>
                 <input
@@ -110,7 +115,13 @@ class AddClient extends Component {
 }
 
 AddClient.propTypes = {
-  firestore: PropTypes.object.isRequired
+  firestore: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired
 };
 
-export default firestoreConnect()(AddClient);
+export default compose(
+  firestoreConnect(),
+  connect((state, props) => ({
+    settings: state.settings
+  }))
+)(AddClient);
