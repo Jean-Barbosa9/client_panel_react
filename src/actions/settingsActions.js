@@ -42,7 +42,6 @@ export const setAllowRegistration = () => {
 
   // Toggle value
   settings.allowRegistration = !settings.allowRegistration;
-  console.log("settings: ", settings);
 
   // Set settings back to localStorage
   localStorage.setItem("settings", JSON.stringify(settings));
