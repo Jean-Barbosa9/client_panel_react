@@ -31,10 +31,7 @@ class Register extends Component {
 
     firebase.createUser({ email, password }).catch(error => {
       console.error(error);
-      notifyUser(
-        "That user already exists, please click in login and sign in from there",
-        "error"
-      );
+      notifyUser(error.message, "error");
     });
   };
 

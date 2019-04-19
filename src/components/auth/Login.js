@@ -27,15 +27,7 @@ class Login extends Component {
       .then(notifyUser("Checking...", "loading"))
       .catch(error => {
         console.error("Error: ", error);
-
-        switch (error.code) {
-          case "auth/user-not-found":
-            return notifyUser("User does not exist", "error");
-          case "auth/wrong-password":
-            return notifyUser("You entered an invalid password", "error");
-          default:
-            return notifyUser("Something went wrong", "error");
-        }
+        notifyUser(error.message, "error");
       });
   };
 
