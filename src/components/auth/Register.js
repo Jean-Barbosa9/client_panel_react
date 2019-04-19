@@ -1,26 +1,54 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { firebaseConnect } from "react-redux-firebase";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import Alert from "../layout/Alert";
+import { notifyUser } from "../../actions/notifyActions";
 
 class Register extends Component {
   state = {
-    email: '',
-    password: ''
-  }
-  
-  onChange = e => {
-    this.setState({[e.target.name]: e.target.value})
-  }
-  
-  onSubmit = e => {
-    e.preventDefault()
-    console.log('Send register to firebase');
+    email: "",
+    password: ""
+  };
+
+  UNSAFE_componentWillMount() {
+    const { allowRegistration } = this.props.settings;
+
+    if (!allowRegistration) {
+      this.props.history.push("/");
+    }
   }
 
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const { firebase, notifyUser } = this.props;
+    const { email, password } = this.state;
+
+    firebase.createUser({ email, password }).catch(error => {
+      console.error(error);
+      notifyUser(
+        "That user already exists, please click in login and sign in from there",
+        "error"
+      );
+    });
+  };
+
   render() {
+    const { message, messageType } = this.props.notify;
+
     return (
       <div className="row">
         <div className="col-md-8 mx-auto">
           <div className="card">
             <div className="card-body">
+              {message ? (
+                <Alert message={message} messageType={messageType} />
+              ) : null}
               <h1 className="text-center pb-4 pt-3">
                 <span className="text-primary">
                   <i className="fas fa-clipboard mr-2" />
@@ -62,4 +90,20 @@ class Register extends Component {
   }
 }
 
-export default Register
+Register.propTypes = {
+  firebase: PropTypes.object.isRequired,
+  notify: PropTypes.object.isRequired,
+  notifyUser: PropTypes.func.isRequired,
+  settings: PropTypes.object.isRequired
+};
+
+export default compose(
+  firebaseConnect(),
+  connect(
+    (state, props) => ({
+      notify: state.notify,
+      settings: state.settings
+    }),
+    { notifyUser }
+  )
+)(Register);
