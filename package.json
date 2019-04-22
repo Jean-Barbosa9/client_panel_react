@@ -1,6 +1,6 @@
 {
   "name": "client_panel_react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "homepage": "https://client-panel-react-jb9.firebaseapp.com",
   "dependencies": {
