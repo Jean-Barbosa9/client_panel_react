@@ -3,7 +3,7 @@ import spinner from "./spinner.gif";
 
 export default function Spinner() {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className="container" style={{ textAlign: "center" }}>
       <img src={spinner} alt="Loading..." />
     </div>
   );

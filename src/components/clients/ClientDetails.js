@@ -75,7 +75,7 @@ class ClientDetails extends Component {
     if (client) {
       const { id, firstName, lastName, email, phone, balance } = client;
       return (
-        <div className="client-details__main-wrapper">
+        <div className="client-details__main-wrapper container">
           <div className="row">
             <div className="col-sm-6">
               <Link to="/" className="btn-link">
