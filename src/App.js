@@ -19,7 +19,7 @@ class App extends Component {
         <Router>
           <AppNavbar />
           <Switch>
-            <div className="container">
+            <React.Fragment>
               <Route
                 exact
                 path="/"
@@ -55,7 +55,7 @@ class App extends Component {
                 path="/settings"
                 component={UserIsAuthenticated(Settings)}
               />
-            </div>
+            </React.Fragment>
           </Switch>
         </Router>
       </Provider>

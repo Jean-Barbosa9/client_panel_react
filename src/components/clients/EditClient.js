@@ -46,79 +46,81 @@ class EditClient extends Component {
 
     if (client) {
       return (
-        <div className="add-client__main-wrapper row">
-          <div className="col-md-6">
-            <div className="add-clients__back">
-              <Link to="/" className="btn btn-link">
-                <i className="icon-back fas fa-arrow-circle-left" /> Back to
-                Dashboard
-              </Link>
-            </div>
-            <div className="card">
-              <div className="card-header">Add Client</div>
-              <div className="card-body">
-                <form onSubmit={this.onSubmit}>
-                  <div className="form-group">
-                    <label htmlFor="firstName">First Name</label>
+        <div className="add-client__main-wrapper container">
+          <div className="row">
+            <div className="col-md-6">
+              <div className="add-clients__back">
+                <Link to="/" className="btn btn-link">
+                  <i className="icon-back fas fa-arrow-circle-left" /> Back to
+                  Dashboard
+                </Link>
+              </div>
+              <div className="card">
+                <div className="card-header">Add Client</div>
+                <div className="card-body">
+                  <form onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                      <label htmlFor="firstName">First Name</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="firstName"
+                        minLength="2"
+                        ref={this.firstNameInput}
+                        defaultValue={client.firstName}
+                        required="required"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="lastName">Last Name</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="lastName"
+                        minLength="2"
+                        ref={this.lastNameInput}
+                        defaultValue={client.lastName}
+                        required="required"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="email">Email</label>
+                      <input
+                        className="form-control"
+                        type="email"
+                        name="email"
+                        ref={this.emailInput}
+                        defaultValue={client.email}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="phone">Phone</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="phone"
+                        ref={this.phoneInput}
+                        defaultValue={client.phone}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="balance">Balance</label>
+                      <input
+                        className="form-control"
+                        type="text"
+                        name="balance"
+                        ref={this.balanceInput}
+                        defaultValue={client.balance}
+                        disabled={disableBalanceOnEdit}
+                      />
+                    </div>
                     <input
-                      className="form-control"
-                      type="text"
-                      name="firstName"
-                      minLength="2"
-                      ref={this.firstNameInput}
-                      defaultValue={client.firstName}
-                      required="required"
+                      type="submit"
+                      className="btn btn-block btn-primary"
+                      value="Add Client"
                     />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="lastName">Last Name</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="lastName"
-                      minLength="2"
-                      ref={this.lastNameInput}
-                      defaultValue={client.lastName}
-                      required="required"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      className="form-control"
-                      type="email"
-                      name="email"
-                      ref={this.emailInput}
-                      defaultValue={client.email}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="phone">Phone</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="phone"
-                      ref={this.phoneInput}
-                      defaultValue={client.phone}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="balance">Balance</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="balance"
-                      ref={this.balanceInput}
-                      defaultValue={client.balance}
-                      disabled={disableBalanceOnEdit}
-                    />
-                  </div>
-                  <input
-                    type="submit"
-                    className="btn btn-block btn-primary"
-                    value="Add Client"
-                  />
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -143,7 +145,7 @@ export default compose(
       doc: props.match.params.id
     }
   ]),
-  connect(({firestore: {ordered}, settings}, props) => ({
+  connect(({ firestore: { ordered }, settings }, props) => ({
     client: ordered.client && ordered.client[0],
     settings
   }))
