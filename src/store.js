@@ -60,14 +60,25 @@ if (localStorage.getItem("settings") == null) {
 // Create initial state
 const initialState = { settings: JSON.parse(localStorage.getItem("settings")) };
 
+const REDUX__DEVTOOLS__EXTENSION =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
 // Create store
-const store = createStoreWithFirebase(
-  rootReducer,
-  initialState,
-  compose(
-    reactReduxFirebase(firebase),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+const store =
+  window.location.port >= 3000 &&
+  window.navigator.userAgent.indexOf("Chrome") >= 0
+    ? createStoreWithFirebase(
+        rootReducer,
+        initialState,
+        compose(
+          reactReduxFirebase(firebase),
+          REDUX__DEVTOOLS__EXTENSION
+        )
+      )
+    : createStoreWithFirebase(
+        rootReducer,
+        initialState,
+        compose(reactReduxFirebase(firebase))
+      );
 
 export default store;
